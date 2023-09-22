@@ -1,2 +1,2 @@
 # csharp
-Spotify Blend but Better
+Spotify Blend but Better: Duke CS316 Open Project
