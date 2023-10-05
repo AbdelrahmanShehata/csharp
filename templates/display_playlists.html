@@ -6,7 +6,7 @@
 <body>
     <h1>My Playlists</h1>
     <ul>
-        {% for artist in artists %}
+        {% for playlist in playlists %}
             <li>
                 <a href="{{ url_for('display_tracks', playlist_id=playlist['id']) }}">{{ playlist['name'] }}</a>
             </li>
