@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Authorization</title>
+    <title>Recommended Tracks</title>
 </head>
 <body>
-    <h2>Spotify Authorization App</h2>
-    <a href="{{ url_for('authorize') }}">Authorize with Spotify</a>
+    <h1>Recommended Tracks</h1>
+    <ul>
+        {% for track in tracks %}
+            <li>{{ track }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
