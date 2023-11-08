@@ -12,7 +12,7 @@
     {% else %}
     <h2>Select an option:</h2>
     <ul>
-        <li><a href="{{ url_for('display_playlists') }}">View My Playlists</a></li>
+        <li class="option"><a href="{{ url_for('display_playlists') }}">View My Playlists</a></li>
         <li><a href="{{ url_for('get_recommendations') }}">Get Top Recommended Songs</a></li>
         <li><a href="{{ url_for('display_artists') }}">See Top Artists</a></li>
         <li><a href="{{ url_for('display_top_tracks') }}">See Top Tracks</a></li>
