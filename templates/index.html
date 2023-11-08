@@ -2,8 +2,9 @@
 <html>
 <head>
     <title>Spotify Integrator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body style="background-color: black;">
     <h1>Welcome to Spotify Integrator</h1>
     {% if not authorized %}
     <p>Please authorize with Spotify to proceed:</p>
@@ -15,6 +16,7 @@
         <li><a href="{{ url_for('get_recommendations') }}">Get Top Recommended Songs</a></li>
         <li><a href="{{ url_for('display_artists') }}">See Top Artists</a></li>
         <li><a href="{{ url_for('display_top_tracks') }}">See Top Tracks</a></li>
+        <li><a href="{{ url_for('display_saved_albums') }}">Saved Albums Testing DON'T TOUCH</a></li>
         <li><a href="{{ url_for('display_blended') }}">Blended</a></li>
     </ul>
     {% endif %}
