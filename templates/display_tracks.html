@@ -6,8 +6,11 @@
 <body>
     <h1>Tracks in {{ playlist_name }}</h1>
     <ul>
-        {% for track in tracks %}
-            <li>{{ track['track']['name'] }} by {{ track['track']['artists'][0]['name'] }}</li>
+        {% for track in top_tracks %}
+             
+                {% if track.playlistName == playlist_id %}
+                    <li>{{ track.name }} by {{ track.artists }}</li>
+                {% endif %}
         {% endfor %}
     </ul>
 </body>
