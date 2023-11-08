@@ -6,12 +6,43 @@
 <body>
     <h1>Your Top 50 Tracks</h1>
     <ul>
-        <!-- {% for track in tracks %}
-            <li>{{ track.name }} by {{ track.artists[0].name }}</li>
-        {% endfor %} -->
+
+        <!-- try to make a search bar -->
+
+        <form id="search-form" action="/search" method="post">
+            <input type="text" id="search-input" name="search-query" placeholder="Search for a title...">
+            <input type="submit" value="Search">
+        </form>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const searchForm = document.getElementById("search-form");
+                searchForm.addEventListener("submit", function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+        
+                    const searchInput = document.getElementById("search-input");
+                    const query = searchInput.value;
+        
+                    fetch('/search', {
+                        method: 'POST',
+                        body: new URLSearchParams({ 'search-query': query }),
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            document.body.innerHTML = data;
+                        });
+                });
+            });
+        </script>
+
         {% for track in top_tracks %}
-            <li> {{ track.name }} by {{track.artists}} </li>
+        <li> {{ track.name }} by {{track.artists}} </li>
         {% endfor %}
+        
+
     </ul>
 </body>
 </html>
