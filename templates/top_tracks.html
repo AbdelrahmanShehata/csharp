@@ -7,8 +7,7 @@
     <h1>Your Top 50 Tracks</h1>
     <ul>
 
-        <!-- try to make a search bar -->
-
+        <!-- Search bar -->
         <form id="search-form" action="/search" method="post">
             <input type="text" id="search-input" name="search-query" placeholder="Search for a title...">
             <input type="submit" value="Search">
@@ -30,19 +29,18 @@
                             'Content-Type': 'application/x-www-form-urlencoded',
                         },
                     })
-                        .then(response => response.text())
-                        .then(data => {
-                            document.body.innerHTML = data;
-                        });
+                    .then(response => response.text())
+                    .then(data => {
+                        document.body.innerHTML = data;
+                    });
                 });
             });
         </script>
 
-        {% for track in song %}
-        <li> {{ track.name }} by {{track.artists}} </li>
+        {% for track in top_tracks %}
+            <li>{{ track.name }} by {{ track.artists }}</li>
         {% endfor %}
-        
-
     </ul>
 </body>
 </html>
+
