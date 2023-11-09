@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blend Users' Top Tracks</title>
+</head>
+<body>
+    <h1>Blend Your Top Tracks with Another User</h1>
+
+    <form action="{{ url_for('blend_users') }}" method="post">
+        <label for="chosen_user_id">Choose a user to blend with:</label>
+        <select name="chosen_user_id" id="chosen_user_id">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Blend">
+    </form>
+</body>
+</html>
