@@ -8,7 +8,6 @@
     <ul>
         {% for artist in artists %}
         <img src="{{ artist.images[0].url }}" alt="{{ artist.name }}" height=200 width=200>
-        {{ artist.name }}
         <li>{{ artist.name }}</li>
         {% endfor %}
     </ul>
