@@ -1,0 +1,24 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Blend Playlists</title>
+    </head>
+    <body>
+        <h1>Select Two Playlists to Blend</h1>
+        <form method="post" action="{{ url_for('blend_playlists_route') }}">
+            <label for="playlist1">Playlist 1:</label>
+            <select name="playlist1" id="playlist1">
+                {% for playlist in playlists %}
+                <option value="{{ playlist['id'] }}">{{ playlist['name'] }}</option>
+                {% endfor %}
+            </select>
+            <label for="playlist2">Playlist 2:</label>
+            <select name="playlist2" id="playlist2">
+                {% for playlist in playlists %}
+                <option value="{{ playlist['id'] }}">{{ playlist['name'] }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Blend Playlists">
+        </form>
+    </body>
+    </html>

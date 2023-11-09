@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blend Playlists</title>
+    <!-- Add any additional stylesheet links here -->
+</head>
+<body>
+
+<h1>Blend Playlists</h1>
+
+<!-- The form for blending playlists -->
+<form method="post" action="{{ url_for('blend_playlists_with_user_route') }}">
+    <!-- CSRF token is necessary for form submission for security -->
+    {{ form.hidden_tag() }}
+
+    <div>
+        <label for="playlist1">Your Playlist ID:</label>
+        <input type="text" id="playlist1" name="playlist1" required>
+    </div>
+
+    <div>
+        <label for="user-select">Select a User to blend with:</label>
+        <select name="selected_user" id="user-select" required>
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <input type="submit" value="Blend Playlists">
+    </div>
+</form>
+
+<!-- This part of the template will render the blended playlists if there are any -->
+{% if blended_tracks %}
+    <h2>Blended Playlist:</h2>
+    <ul>
+        {% for track in blended_tracks %}
+            <li>{{ track.name }} by {{ track.artist }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+</body>
+</html>

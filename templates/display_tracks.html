@@ -4,15 +4,13 @@
     <title>Playlist Tracks</title>
 </head>
 <body>
-    <h1>Tracks in {{ playlist_name }}</h1>
+    <h2>Playlist Songs from Database</h2>
     <ul>
-        {% for track in top_tracks %}
-             
-                {% if track.playlistName == playlist_id %}
-                    <li>{{ track.name }} by {{ track.artists }}</li>
-                {% endif %}
+        {% for song in playlist_songs %}
+            <li>{{ song.name }} by {{ song.artists }}</li>
         {% endfor %}
     </ul>
 </body>
 </html>
+
 
