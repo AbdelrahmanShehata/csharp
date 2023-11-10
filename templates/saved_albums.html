@@ -10,14 +10,7 @@
     <h1>Saved Albums</h1>
     <ul>
         {% for saved_album in saved_albums %}
-        <li>
-            <ul>
-                <li>{{saved_album.name }}</li>
-                {% for key, value in saved_album.items() %}
-                    <li><strong>{{ key }}:</strong> {{ value }}</li>
-                {% endfor %}
-            </ul>
-        </li>
+        <li>{{ saved_album.name }}</li>
         {% endfor %}
     </ul>
 </body>
