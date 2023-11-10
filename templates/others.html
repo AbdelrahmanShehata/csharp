@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Playlists</title>
+</head>
+<body>
+    <h1>My Playlists</h1>
+    <ul>
+        {% for playlist in playlists %}
+        <!-- {% if playlist.images %}
+            <img src="{{ playlist.images[0].url }}" alt="Playlist Image">
+        {% endif %} -->
+            <li>
+                <!-- <a href="{{ url_for('display_tracks', playlist_id=playlist['id']) }}">{{ playlist['name'] }}</a> -->
+                <a href="{{ url_for('display_tracks', playlist_id=playlist['id'])}}">{{ playlist['name'] }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
