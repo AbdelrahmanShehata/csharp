@@ -38,8 +38,9 @@
         </script>
         
         {% for track in top_tracks %}
-            <li>{{ track.name }} by {{ track.artists }}</li>
-        {% endfor %}
+        <!-- Each track name and artist is a clickable link to the track's URL -->
+        <li><a href="{{ track.url }}" target="_blank">{{ track.name }} by {{ track.artists }}</a></li>
+    {% endfor %}
     </ul>
 </body>
 </html>

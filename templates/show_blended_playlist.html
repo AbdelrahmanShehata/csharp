@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
 <head>
     <title>Blended Playlist</title>
 </head>
 <body>
     <h1>Blended Playlist</h1>
+
     {% if blended_tracks %}
+        <!-- Display compatibility score -->
+        <h2>Playlist Compatibility: {{ compatibility }}%</h2>
+
         <ul>
         {% for track in blended_tracks %}
             <li>{{ track['name'] }} by {{ track['artists'] }} from {{ track['origin'] }}</li>
