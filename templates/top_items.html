@@ -8,7 +8,15 @@
     <ul>
         {% for record in top_records%}
         <li>
-            {{ record.rank }} {{record.song_name}}
+            {{ record.rank }} {{record.song_name}} by {{record.song_artist}}
+        </li>
+        {% endfor %}
+    </ul>
+    <h1>Top Artists</h1>
+    <ul>
+        {% for record in top_records%}
+        <li>
+            {{record.rank}} {{record.artist}}
         </li>
         {% endfor %}
     </ul>
