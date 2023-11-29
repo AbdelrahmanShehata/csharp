@@ -7,10 +7,12 @@
     <h1>Top Artists</h1>
     <ul>
         {% for artist in artists %}
-        <li>
-            <img src="{{ artist.image_url }}" alt="{{ artist.name }}" height="200" width="200">
-            {{ artist.name }}
-        </li>
+            {% for top_artist in top_artists %}
+                {% if top_artist.name == artist.name %}
+                    <img src="{{ artist.image_url }}" height="200" width="200">
+                    <li>{{ top_artist.name }}</li>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
     </ul>
 </body>
