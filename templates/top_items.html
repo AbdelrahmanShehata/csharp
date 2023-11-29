@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top Records</title>
+</head>
+<body>
+    <h1>Top Records</h1>
+    <ul>
+        {% for record in top_records%}
+        <li>
+            {{ record.rank }} {{record.song_name}}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
