@@ -6,8 +6,11 @@
 <body>
     <h1>Top Artists</h1>
     <ul>
-        {% for artist in top_artists %}
-            <li>{{ top_artists.name }}</li>
+        {% for artist in artists %}
+        <li>
+            <img src="{{ artist.image_url }}" alt="{{ artist.name }}" height="200" width="200">
+            {{ artist.name }}
+        </li>
         {% endfor %}
     </ul>
 </body>
