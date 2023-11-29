@@ -1,47 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top 50 Tracks</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #1DB954;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #282828;
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 600px;
+            text-align: left;
+        }
+        a {
+            color: #1DB954;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #search-form {
+            margin-bottom: 20px;
+        }
+        #search-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 200px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #1DB954;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #1ed760;
+        }
+    </style>
 </head>
 <body>
     <h1>Your Top 50 Tracks</h1>
-    <ul>
 
-        <!-- Search bar -->
-        <form id="search-form" action="/search" method="post">
-            <input type="text" id="search-input" name="search-query" placeholder="Search for a title...">
-            <input type="submit" value="Search">
-        </form>
+    <!-- Search bar -->
+    <form id="search-form" action="/search" method="post">
+        <input type="text" id="search-input" name="search-query" placeholder="Search for a title...">
+        <input type="submit" value="Search">
+    </form>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const searchForm = document.getElementById("search-form");
-                searchForm.addEventListener("submit", function (event) {
-                    event.preventDefault(); // Prevent the default form submission
-        
-                    const searchInput = document.getElementById("search-input");
-                    const query = searchInput.value;
-        
-                    fetch('/search', {
-                        method: 'POST',
-                        body: new URLSearchParams({ 'search-query': query }),
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        document.body.innerHTML = data;
-                    });
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchForm = document.getElementById("search-form");
+            searchForm.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent the default form submission
+    
+                const searchInput = document.getElementById("search-input");
+                const query = searchInput.value;
+    
+                fetch('/search', {
+                    method: 'POST',
+                    body: new URLSearchParams({ 'search-query': query }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.body.innerHTML = data;
                 });
             });
-        </script>
-        
+        });
+    </script>
+    
+    <ul>
         {% for track in top_tracks %}
         <!-- Each track name and artist is a clickable link to the track's URL -->
         <li><a href="{{ track.url }}" target="_blank">{{ track.name }} by {{ track.artists }}</a></li>
-    {% endfor %}
+        {% endfor %}
     </ul>
 </body>
 </html>
-

@@ -1,26 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify Integrator</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        h1, h2 {
+            color: #1DB954;
+        }
+        a {
+            display: inline-block;
+            background-color: #1DB954;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        a:hover {
+            background-color: #1ed760;
+            transform: scale(1.05);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 0.8em;
+        }
+    </style>
 </head>
-<body style="background-color: black;">
-    <h1>Welcome to Spotify Integrator</h1>
-    {% if not authorized %}
-    <p>Please authorize with Spotify to proceed:</p>
-    <a href="{{ url_for('authorize') }}">Authorize with Spotify</a>
-    {% else %}
-    <h2>Select an option:</h2>
-    <ul>
-        <li class="option"><a href="{{ url_for('display_playlists') }}">View My Playlists</a></li>
-        <li><a href="{{ url_for('get_recommendations') }}">Get Top Recommended Songs</a></li>
-        <li><a href="{{ url_for('display_artists') }}">See Top Artists</a></li>
-        <li><a href="{{ url_for('display_top_tracks') }}">See Top Tracks</a></li>
-        <li><a href="{{ url_for('display_saved_albums') }}">Saved Albums Testing DON'T TOUCH</a></li>
-        <li><a href="{{ url_for('blend_playlists_route') }}">Blend My Playlists</a></li>
-        <li><a href="{{ url_for('blend_users') }}">Blend with Other User's Playlist</a></li>
-        <li><a href="{{ url_for('user_display') }}">Top Items</a></li>
-    </ul>
-    {% endif %}
+<body>
+    <div class="container">
+        <h1>Welcome to Spotify Integrator</h1>
+        {% if not authorized %}
+            <p>Please authorize with Spotify to proceed:</p>
+            <a href="{{ url_for('authorize') }}">Authorize with Spotify</a>
+        {% else %}
+            <h2>Select an option:</h2>
+            <ul>
+                <li><a href="{{ url_for('display_playlists') }}">View My Playlists</a></li>
+                <li><a href="{{ url_for('get_recommendations') }}">Get Top Recommended Songs</a></li>
+                <li><a href="{{ url_for('display_artists') }}">See Top Artists</a></li>
+                <li><a href="{{ url_for('display_top_tracks') }}">See Top Tracks</a></li>
+                <li><a href="{{ url_for('display_saved_albums') }}">Saved Albums Testing DON'T TOUCH</a></li>
+                <li><a href="{{ url_for('blend_playlists_route') }}">Blend My Playlists</a></li>
+                <li><a href="{{ url_for('blend_users') }}">Blend with Other User's Playlist</a></li>
+                <li><a href="{{ url_for('user_display') }}">Top Items</a></li>
+            </ul>
+        {% endif %}
+    </div>
+    <div class="footer">
+        <p>&copy; 2023 Spotify Integrator. All rights reserved.</p>
+    </div>
 </body>
 </html>
+
+

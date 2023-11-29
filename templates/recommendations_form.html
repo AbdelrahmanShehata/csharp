@@ -5,15 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customize Recommendations</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #1DB954;
+        }
+        p {
+            color: #ccc;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+            text-align: left;
+        }
+        label {
+            color: #ccc;
+        }
+        input[type=text] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 4px;
+            background-color: #282828;
+            color: #fff;
+        }
+        input[type=submit] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #1DB954;
+            color: #fff;
+            font-size: 16px;
+        }
+        input[type=submit]:hover {
+            background-color: #1ed760;
+        }
+    </style>
 </head>
 <body>
     <h1>Customize Your Music Recommendations</h1>
-    <p>Enter a custom dataset for comparison, or leave it blank for US top hits.</p>
-
+    <p>Enter a Playlist ID or Share Link for personalized recommendations, or leave it blank for US top hits.</p>
 
     <form action="/recommendations/" method="post">
-        <label for="custom_dataset">Custom Dataset (optional):</label><br>
-        <input type="text" id="custom_dataset" name="custom_dataset" placeholder="Enter dataset name"><br><br>
+        <label for="custom_dataset">Playlist ID or Share Link (optional):</label><br>
+        <input type="text" id="custom_dataset" name="custom_dataset" placeholder="Enter Playlist ID or Share Link"><br><br>
         <input type="submit" value="Get Recommendations">
     </form>
 </body>

@@ -1,5 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blended Playlist</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #1DB954;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #282828;
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 600px;
+            text-align: left;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 200px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #1DB954;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #1ed760;
+        }
+    </style>
 </head>
 <body>
     <h1>Blended Playlist</h1>
@@ -8,17 +58,17 @@
         <!-- Display compatibility score -->
         <h2>Playlist Compatibility: {{ compatibility }}%</h2>
 
+        <!-- Form to create a new Spotify playlist with the blended tracks -->
+        <form action="{{ url_for('create_playlist_route') }}" method="post">
+            <input type="text" name="playlist_name" placeholder="Enter Playlist Name" required>
+            <input type="submit" value="Create Playlist">
+        </form>
+
         <ul>
         {% for track in blended_tracks %}
             <li>{{ track['name'] }} by {{ track['artists'] }} from {{ track['origin'] }}</li>
         {% endfor %}
         </ul>
-
-        <!-- Add this form below the list of tracks to allow users to create a new Spotify playlist with the blended tracks -->
-        <form action="{{ url_for('create_playlist_route') }}" method="post">
-            <input type="text" name="playlist_name" placeholder="Enter Playlist Name" required>
-            <input type="submit" value="Create Playlist">
-        </form>
     {% else %}
         <p>No tracks to display.</p>
     {% endif %}

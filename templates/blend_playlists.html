@@ -1,24 +1,87 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Blend Playlists</title>
-    </head>
-    <body>
-        <h1>Select Two Playlists to Blend</h1>
-        <form method="post" action="{{ url_for('blend_playlists_route') }}">
-            <label for="playlist1">Playlist 1:</label>
-            <select name="playlist1" id="playlist1">
-                {% for playlist in playlists %}
-                <option value="{{ playlist['id'] }}">{{ playlist['name'] }}</option>
-                {% endfor %}
-            </select>
-            <label for="playlist2">Playlist 2:</label>
-            <select name="playlist2" id="playlist2">
-                {% for playlist in playlists %}
-                <option value="{{ playlist['id'] }}">{{ playlist['name'] }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Blend Playlists">
-        </form>
-    </body>
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blend Playlists</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #1DB954;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .playlist-selector {
+            background-color: #282828;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            width: 250px;
+        }
+        label {
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        input[type=submit] {
+            background-color: #1DB954;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        input[type=submit]:hover {
+            background-color: #1ed760;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Two Playlists to Blend</h1>
+    <form method="post" action="{{ url_for('blend_playlists_route') }}">
+        <div class="container">
+            <div class="playlist-selector">
+                <label for="playlist1">Playlist 1:</label>
+                <select name="playlist1" id="playlist1">
+                    {% for playlist in playlists %}
+                    <option value="{{ playlist['id'] }}">{{ playlist['name'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="playlist-selector">
+                <label for="playlist2">Playlist 2:</label>
+                <select name="playlist2" id="playlist2">
+                    {% for playlist in playlists %}
+                    <option value="{{ playlist['id'] }}">{{ playlist['name'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <input type="submit" value="Blend Playlists">
+    </form>
+</body>
+</html>

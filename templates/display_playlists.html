@@ -1,20 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Playlists</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #1DB954;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        li {
+            background-color: #282828;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+        li:hover {
+            transform: translateY(-5px);
+        }
+        a {
+            display: block;
+            padding: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #1DB954;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>My Playlists</h1>
     <ul>
         {% for playlist in playlists %}
-        <!-- {% if playlist.images %}
-            <img src="{{ playlist.images[0].url }}" alt="Playlist Image">
-        {% endif %} -->
-            <li>
-                <!-- <a href="{{ url_for('display_tracks', playlist_id=playlist['id']) }}">{{ playlist['name'] }}</a> -->
-                <a href="{{ url_for('display_tracks', playlist_id=playlist['id'])}}">{{ playlist['name'] }}</a>
-            </li>
+        <li>
+            {% if playlist.images %}
+                <img src="{{ playlist.images[0].url }}" alt="Playlist Image">
+            {% endif %}
+            <a href="{{ url_for('display_tracks', playlist_id=playlist['id']) }}">{{ playlist['name'] }}</a>
+        </li>
         {% endfor %}
     </ul>
 </body>
 </html>
+

@@ -1,18 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top Artists</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #1DB954;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        li {
+            background-color: #282828;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            width: 200px;
+            text-align: center;
+            padding: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Top Artists</h1>
     <ul>
         {% for artist in artists %}
-            {% for top_artist in top_artists %}
-                {% if top_artist.name == artist.name %}
-                    <img src="{{ artist.image_url }}" height="200" width="200">
-                    <li>{{ top_artist.name }}</li>
-                {% endif %}
-            {% endfor %}
+        <li>
+            <img src="{{ artist.image_url }}" alt="{{ artist.name }}">
+            <div>{{ artist.name }}</div>
+        </li>
         {% endfor %}
     </ul>
 </body>
