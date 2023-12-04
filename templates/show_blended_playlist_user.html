@@ -28,6 +28,14 @@
             max-width: 600px;
             text-align: left;
         }
+        .top-controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .top-controls form {
+            margin: 0 10px;
+        }
         input[type="text"], input[type="submit"], input[type="checkbox"] {
             padding: 10px;
             border-radius: 5px;
@@ -60,6 +68,15 @@
 
     {% if blended_tracks %}
         <h2>Playlist Compatibility: {{ compatibility }}%</h2>
+
+        <div class="top-controls">
+            <!-- Separate form for reshuffling tracks -->
+            <form action="{{ url_for('blend_users') }}" method="post">
+                <input type="hidden" name="reshuffle" value="true">
+                <input type="hidden" name="blend_type" value="{{ blend_type }}">
+                <input type="submit" value="Reshuffle">
+            </form>
+        </div>
 
         <!-- Form for creating a new playlist -->
         <form action="{{ url_for('create_playlist_route') }}" method="post">

@@ -42,6 +42,12 @@
 </head>
 <body>
     <h1>Top Artists</h1>
+    <h2>Top Genres:</h2>
+    <ul>
+        {% for genre in top_genres %}
+            <li>{{ genre }}</li>
+        {% endfor %}
+    </ul>
     <ul>
         {% for artist in artists %}
         <li>

@@ -2,11 +2,40 @@
 <html>
 <head>
     <title>Playlist Created</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #1DB954;
+        }
+        p {
+            margin: 10px 0;
+        }
+        a {
+            display: inline-block;
+            background-color: #1DB954;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #1ed760;
+        }
+    </style>
 </head>
 <body>
     <h1>Playlist Successfully Created!</h1>
     <p>Your new playlist has been created on Spotify.</p>
-    <p>Playlist ID: {{ playlist_id }}</p>
+    <p>Playlist ID: <a href="https://open.spotify.com/playlist/{{ playlist_id }}" target="_blank">{{ playlist_id }}</a></p>
     <a href="/">Return to Home</a>
 </body>
 </html>
