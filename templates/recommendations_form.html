@@ -56,14 +56,12 @@
 </head>
 <body>
     <h1>Customize Your Music Recommendations</h1>
-    <form action="/blend_users" method="post">
-        <label for="chosen_user_ids">Select Users to Blend With:</label><br>
-        <select multiple id="chosen_user_ids" name="chosen_user_ids">
-            {% for user in users %}
-            <option value="{{ user.id }}">{{ user.name }}</option>
-            {% endfor %}
-        </select><br><br>
-        <input type="submit" value="Blend Playlists">
+    <p>Enter a Playlist ID or Share Link for personalized recommendations, or leave it blank for US top hits.</p>
+
+    <form action="/recommendations/" method="post">
+        <label for="custom_dataset">Playlist ID or Share Link (optional):</label><br>
+        <input type="text" id="custom_dataset" name="custom_dataset" placeholder="Enter Playlist ID or Share Link"><br><br>
+        <input type="submit" value="Get Recommendations">
     </form>
 </body>
 </html>
