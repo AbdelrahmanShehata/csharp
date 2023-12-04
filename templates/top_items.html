@@ -5,33 +5,11 @@
 </head>
 <body>
 
-
-    <form action="{{ url_for('user_display') }}" method="post">
-        <label for="user_id">Select User:</label>
-        <select name="user_id" id="user_id">
-            {% for user in users %}  <!-- Assuming users contains a list of user IDs -->
-                <option value="{{ user.id }}">{{ user.username }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit">Show Top Tracks</button>
-    </form>
-
-
-
-
     <h1>Top Records</h1>
     <ul>
-        {% for record in top_records%}
+        {% for user in users%}
         <li>
-            {{ record.rank }} {{record.song_name}} by {{record.song_artist}}
-        </li>
-        {% endfor %}
-    </ul>
-    <h1>Top Artists</h1>
-    <ul>
-        {% for record in top_records%}
-        <li>
-            {{record.rank}} {{record.artist}}
+            <a href="/top_items/{{ user.username }}">{{ user.username }}</a>
         </li>
         {% endfor %}
     </ul>
