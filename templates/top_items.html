@@ -11,32 +11,59 @@
         text-align: center;
         margin: 0;
         padding: 20px;
+        display: flex; 
+        justify-content: center;
+        align-items: center; 
+        height: 100vh; 
+        flex-direction: column;
     }
     h1, h2 {
         color: #1DB954;
     }
     ul {
-        list-style: none;
-        padding: 0;
-    }
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the space between items */
+    } 
+
     li {
         background-color: #282828;
-        margin: 10px auto;
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        width: 200px;
+        text-align: center;
         padding: 10px;
-        border-radius: 5px;
-        max-width: 600px;
-        text-align: left;
     }
+
+    img {
+        width: 65px;
+        height: 65px;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto 10px; /* Center the images horizontally */
+    }
+    
 </style>
 <body>
 
     <h1>Top Records</h1>
-    <ul>
-        {% for user in users%}
-        <li>
-            <a href="/top_items/{{ user.username }}">{{ user.username }}</a>
-        </li>
-        {% endfor %}
-    </ul>
+    {% for user_data_item in user_data %}
+    {% for user in users %}
+        {% if user.id == user_data_item.id %}
+            <li class="user-items">
+                <a href="/top_items/{{ user.username }}">{{ user.username }}</a>
+                {% if user_data_item.image_url %}
+                    <img src="{{ user_data_item.image_url }}" alt="Profile Picture">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
 </body>
 </html>
