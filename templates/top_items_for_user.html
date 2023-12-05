@@ -20,6 +20,16 @@
             list-style: none;
             padding: 0;
         }
+        .genre-list{
+            list-style: none;
+            padding: 0px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .genre-list li {
+            margin: 2px;
+        }
         li {
             background-color: #282828;
             margin: 10px auto;
@@ -31,6 +41,11 @@
 </style>
 <body>
     <h1>Top Records</h1>
+    <ul class="genre-list">
+        {% for genre in top_genre %}
+            <li>{{ genre[0] }}</li>
+        {% endfor %}
+    </ul>
     <ul>
         {% for record in top_records%}
         <li>
