@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blend History</title>
+    <!-- Add any other necessary HTML head elements -->
+</head>
+<body>
+    <h1>Blend History</h1>
+    {% if blend_history %}
+        <ul>
+            {% for blend in blend_history %}
+                <li>
+                    <strong>{{ blend.blend_name }}</strong> ({{ blend.blend_date.strftime('%Y-%m-%d %H:%M:%S') }})<br>
+                    Blender: {{ blend.blender_username }} | Blende: {{ blend.blende_username }}<br>
+                    Compatibility: {{ blend.compatibility }}<br>
+                    Type of Blend: {{ blend.blend_type }}<br> <!-- Display the type of blend -->
+                    <!-- Display URL if exists -->
+                    {% if blend.url %}
+                        <a href="{{ blend.url }}">Link to Blend</a> | 
+                    {% endif %}
+                    <!-- Add a link to view songs in the blend -->
+                    <a href="{{ url_for('view_songs_in_blend', blend_id=blend.blend_id) }}">View Songs</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No blend history found.</p>
+    {% endif %}
+</body>
+</html>
+
+
+
+

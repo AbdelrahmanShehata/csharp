@@ -33,19 +33,46 @@
             color: #ccc;
             font-size: 0.9em;
         }
+        .song-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
     <h2>Playlist Songs from Database</h2>
-    <ul>
-        {% for song in playlist_songs %}
-            <li>
-                <strong>{{ song.name }}</strong>
-                <span class="song-info"> by {{ song.artists }}</span>
-            </li>
-        {% endfor %}
+    <!-- Display the number of songs -->
+    <h3 id="songCount"></h3>
+    <ul id="songList">
+        {% for song_id, song_name, song_artists, added_on, duration in playlist_songs %}
+        <li>
+            <div class="song-details">
+                <div>
+                    <strong>{{ song_name }}</strong>
+                    <span class="song-info"> by {{ song_artists }}</span>
+                </div>
+                <div class="song-info">
+                    Added on: {{ added_on.strftime('%m/%d/%Y') }}
+                    <br>
+                    {% if duration %}
+                        Duration: {{ duration // 60 }}:{{ '%02d' % (duration % 60) }}
+                    {% else %}
+                        Duration: Unknown
+                    {% endif %}
+                </div>
+            </div>
+        </li>
+    {% endfor %}
     </ul>
+
+    <script>
+        // JavaScript to count and display the number of songs
+        document.addEventListener('DOMContentLoaded', function () {
+            var songList = document.getElementById('songList');
+            var songCount = songList.getElementsByTagName('li').length;
+            document.getElementById('songCount').textContent = 'Number of tracks: ' + songCount;
+        });
+    </script>
 </body>
 </html>
-
-

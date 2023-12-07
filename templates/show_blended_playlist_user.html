@@ -83,6 +83,9 @@
             <input type="text" name="playlist_name" placeholder="Enter Playlist Name" required>
             <input type="submit" value="Create Playlist">
 
+            <!-- Add hidden field to pass blend_id -->
+            <input type="hidden" name="blend_id" value="{{ blend_id }}"> 
+
             <ul>
                 {% for track in blended_tracks %}
                     <li class="track-item">
@@ -98,5 +101,3 @@
     {% endif %}
 </body>
 </html>
-
-

@@ -1,0 +1,19 @@
+<!-- view_songs.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Songs in Blend</title>
+</head>
+<body>
+    <h1>Songs in Blend</h1>
+    {% if songs %}
+        <ul>
+            {% for song in songs %}
+                <li>{{ song.name }} by {{ song.artists }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No songs found in this blend.</p>
+    {% endif %}
+</body>
+</html>
