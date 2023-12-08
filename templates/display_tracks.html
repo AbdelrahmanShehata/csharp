@@ -45,15 +45,37 @@
         a:hover {
             text-decoration: underline;
         }
+        .sorting-bar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .sort-option {
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .sort-option:hover {
+            color: #1DB954;
+        }
     </style>
 </head>
 <body>
     <h2>Playlist Songs from Database</h2>
-    <!-- Display the number of songs -->
+    <div class="sorting-bar">
+        <span class="sort-option" onclick="sortList('name')">Name</span>
+        <span class="sort-option" onclick="sortList('artist')">Artist</span>
+        <span class="sort-option" onclick="sortList('duration')">Duration</span>
+        <span class="sort-option" onclick="sortList('date')">Date Added</span>
+    </div>
     <h3 id="songCount"></h3>
     <ul id="songList">
+        <!-- Your loop for listing songs -->
         {% for song_id, song_name, song_artists, added_on, duration, song_url in playlist_songs %}
-            <li>
+            <li data-name="{{ song_name }}" data-artist="{{ song_artists }}" data-duration="{{ duration }}" data-date="{{ added_on.strftime('%Y-%m-%d') }}">
                 <div class="song-details">
                     <div>
                         <a href="{{ song_url }}" target="_blank"><strong>{{ song_name }}</strong></a>
@@ -74,7 +96,42 @@
     </ul>
 
     <script>
-        // JavaScript to count and display the number of songs
+        function sortList(sortType) {
+            let list, i, switching, b, shouldSwitch;
+            list = document.getElementById("songList");
+            switching = true;
+            /* Make a loop that will continue until no switching has been done: */
+            while (switching) {
+                switching = false;
+                b = list.getElementsByTagName("LI");
+                // Loop through all list items:
+                for (i = 0; i < (b.length - 1); i++) {
+                    shouldSwitch = false;
+                    /* Check if the next item should switch place with the current item,
+                    based on the sorting type (name, artist, duration, date) */
+                    if (sortType === "name" && b[i].getAttribute("data-name").toLowerCase() > b[i + 1].getAttribute("data-name").toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    } else if (sortType === "artist" && b[i].getAttribute("data-artist").toLowerCase() > b[i + 1].getAttribute("data-artist").toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    } else if (sortType === "duration" && parseInt(b[i].getAttribute("data-duration")) > parseInt(b[i + 1].getAttribute("data-duration"))) {
+                        shouldSwitch = true;
+                        break;
+                    } else if (sortType === "date" && new Date(b[i].getAttribute("data-date")) > new Date(b[i + 1].getAttribute("data-date"))) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch and mark the switch as done: */
+                    b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                    switching = true;
+                }
+            }
+        }
+
+        // Count and display the number of songs
         document.addEventListener('DOMContentLoaded', function () {
             var songList = document.getElementById('songList');
             var songCount = songList.getElementsByTagName('li').length;
