@@ -30,13 +30,33 @@
             max-width: 600px;
             text-align: left;
         }
+        a {
+            color: #1DB954;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .track-details {
+            margin-bottom: 5px;
+        }
+        .track-duration {
+            color: #ccc;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
     <h1>Recommended Tracks</h1>
     <ul>
         {% for track in tracks %}
-            <li>{{ track }}</li>
+            <li>
+                <div class="track-details">
+                    <strong>{{ track.name }}</strong> by {{ track.artist }}
+                    <div class="track-duration">Duration: {{ track.duration }}</div>
+                </div>
+                <a href="{{ track.url }}" target="_blank">Listen on Spotify</a>
+            </li>
         {% endfor %}
     </ul>
 </body>

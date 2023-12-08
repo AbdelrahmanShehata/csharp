@@ -38,6 +38,13 @@
             justify-content: space-between;
             align-items: center;
         }
+        a {
+            color: #1DB954;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -45,25 +52,25 @@
     <!-- Display the number of songs -->
     <h3 id="songCount"></h3>
     <ul id="songList">
-        {% for song_id, song_name, song_artists, added_on, duration in playlist_songs %}
-        <li>
-            <div class="song-details">
-                <div>
-                    <strong>{{ song_name }}</strong>
-                    <span class="song-info"> by {{ song_artists }}</span>
+        {% for song_id, song_name, song_artists, added_on, duration, song_url in playlist_songs %}
+            <li>
+                <div class="song-details">
+                    <div>
+                        <a href="{{ song_url }}" target="_blank"><strong>{{ song_name }}</strong></a>
+                        <span class="song-info"> by {{ song_artists }}</span>
+                    </div>
+                    <div class="song-info">
+                        Added on: {{ added_on.strftime('%m/%d/%Y') }}
+                        <br>
+                        {% if duration %}
+                            Duration: {{ duration // 60 }}:{{ '%02d' % (duration % 60) }}
+                        {% else %}
+                            Duration: Unknown
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="song-info">
-                    Added on: {{ added_on.strftime('%m/%d/%Y') }}
-                    <br>
-                    {% if duration %}
-                        Duration: {{ duration // 60 }}:{{ '%02d' % (duration % 60) }}
-                    {% else %}
-                        Duration: Unknown
-                    {% endif %}
-                </div>
-            </div>
-        </li>
-    {% endfor %}
+            </li>
+        {% endfor %}
     </ul>
 
     <script>

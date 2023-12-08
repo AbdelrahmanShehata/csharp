@@ -13,7 +13,7 @@
             margin: 0;
             padding: 20px;
         }
-        h1, h2 {
+        h2 {
             color: #1DB954;
         }
         ul {
@@ -25,9 +25,35 @@
             margin: 10px auto;
             padding: 10px;
             border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
             max-width: 600px;
-            text-align: left;
+            display: flex;
+            align-items: center;
         }
+        .song-info {
+            color: #ccc;
+            font-size: 0.9em;
+            padding-left: 10px;
+        }
+        .track-checkbox {
+            margin-right: 10px;
+        }
+        .track-name {
+            margin-left: 10px;
+        }
+        .track-duration {
+            margin-left: auto;
+            padding-right: 10px;
+        }
+        a {
+            color: #1DB954; /* Link color */
+            text-decoration: none;
+        }
+        a:hover {
+            color: #fff; /* Link color on hover */
+            text-decoration: underline;
+        }
+
         input[type="text"], input[type="submit"], input[type="checkbox"] {
             padding: 10px;
             border-radius: 5px;
@@ -60,19 +86,26 @@
 
     {% if blended_tracks %}
         <h2>Playlist Compatibility: {{ compatibility }}%</h2>
-        <h2>Top Genre: {{ top_genre }}</h2> <!-- Displaying the top genre -->
+        <h2>Top Genre: {{ top_genre }}</h2>
 
-        <!-- Form for creating a new playlist -->
         <form action="{{ url_for('create_playlist_route') }}" method="post">
-            <input type="hidden" name="blend_id" value="{{ blend_id }}"> <!-- Hidden input for blend_id -->
+            <input type="hidden" name="blend_id" value="{{ blend_id }}">
             <input type="text" name="playlist_name" placeholder="Enter Playlist Name" required>
             <input type="submit" value="Create Playlist">
-
             <ul>
                 {% for track in blended_tracks %}
                     <li class="track-item">
                         <input type="checkbox" class="track-checkbox" name="track_selection" value="{{ track['id'] }}" checked>
-                        {{ track['name'] }} by {{ track['artists'] }}
+                        <div class="track-name">
+                            <a href="{{ track['url'] }}" target="_blank">{{ track['name'] }}</a> by {{ track['artists'] }}
+                        </div>
+                        <span class="song-info track-duration">
+                            {% if track['duration'] %}
+                                Duration: {{ track['duration'] // 60 }}:{{ '%02d' % (track['duration'] % 60) }}
+                            {% else %}
+                                Duration: Unknown
+                            {% endif %}
+                        </span>
                     </li>
                 {% endfor %}
             </ul>
