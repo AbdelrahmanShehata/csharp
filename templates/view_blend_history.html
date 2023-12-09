@@ -101,8 +101,7 @@
                 {% endif %}
                 {% for blend in blend_history %}
                     <li>
-                        <strong>{{ blend.blend_name }}</strong> ({{ blend.blend_date.strftime('%Y-%m-%d %H:%M:%S') }})<br>
-                        Blender: {{ blend.blender_username }} | Blende: {{ blend.blende_username }}<br>
+                        <strong>{{ blend.blend_name }}</strong> ({{ blend.blend_date.strftime('%Y-%m-%d %H:%M:%S') }})
                         Compatibility: {{ blend.compatibility }}<br>
                         Type of Blend: {{ blend.blend_type }}<br>
                         {% if blend.url %}

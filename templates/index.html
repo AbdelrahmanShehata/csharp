@@ -61,11 +61,11 @@
                 <li><a href="{{ url_for('get_recommendations') }}">Get Top Recommended Songs</a></li>
                 <li><a href="{{ url_for('display_artists') }}">See Top Artists</a></li>
                 <li><a href="{{ url_for('display_top_tracks') }}">See Top Tracks</a></li>
-                <li><a href="{{ url_for('display_saved_albums') }}">Saved Albums Testing DON'T TOUCH</a></li>
                 <li><a href="{{ url_for('blend_playlists_route') }}">Blend My Playlists</a></li>
                 <li><a href="{{ url_for('blend_users') }}">Blend with Other User's Playlist</a></li>
                 <li><a href="{{ url_for('display_user') }}">Top Items</a></li>
-                <li><a href="{{ url_for('view_blend_history') }}">view_blend_history</a></li>
+                <li><a href="{{ url_for('view_blend_history') }}">Blend History</a></li>
+                <li><a href="{{url_for('display_song_reviews')}}">Song Reviews</a></li>
             </ul>
         {% endif %}
     </div>

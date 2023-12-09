@@ -76,7 +76,7 @@ body {
     color: black;
     background-color: white;
     font-size: 14px;
-    font-family: 'Helvetica', 'sans-serif'
+    font-family: 'Helvetica', 'sans-serif';
     transition: opacity 1s ease-in-out, transform 1.5s ease-in-out;
     transform: translateY(80px); /* Adjusted space */
     transition-delay: 1.5ms;

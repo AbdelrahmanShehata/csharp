@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Song Reviews</h1>
+
+    <!-- Create a form with a drop-down menu -->
+    <form method="post" action="{{ url_for('add_song_review') }}">
+        <label for="song_id">Select a Song:</label>
+        <select name="song_id" id="song_id" required>
+            {% for song in songs %}
+                <option value="{{ song.id }}">{{ song.name }} - {{ song.artists }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="rating">Rating:</label>
+    <select name="rating" id="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+
+        <label for="description">Description:</label>
+        <textarea name="description" required></textarea>
+
+        <button type="submit">Submit Review</button>
+        
+    {% if reviews %}
+        <h2>Existing Reviews</h2>
+        {% for review in reviews %}
+        {% set user = users.get(review.uid) %}
+        {% set song = allsongs.get(review.song_id) %}
+        <p>User: {{ user.username if user else 'Unknown User' }}</p>
+          <p>Description: {{ review.description }}</p>
+          <p>Rating: {{ review.rating }}</p>
+          <p>Song: {{song.name}}</p>
+          <form method="post" action="{{ url_for('delete_review', rid=review.rid) }}">
+            <button type="submit">Delete Review</button>
+        </form>
+          <hr>
+        {% endfor %}
+    {% else %}
+        <p>No reviews available.</p>
+    {% endif %}
+</body>
+</html>
