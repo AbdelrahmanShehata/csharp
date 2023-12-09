@@ -62,12 +62,16 @@
         {% endfor %}
     </ul>
     <h1>User Playlists</h1>
+    {% if public_playlists %}
     <ul>
-        {% for playlist in public_playlists%}
-        <li>
-            <a href="{{ url_for('display_tracks', playlist_id=playlist.id) }}">{{ playlist.name }}</a>
-        </li>
+        {% for playlist in public_playlists %}
+            <li>
+                <a href="{{ url_for('display_tracks', playlist_id=playlist.id) }}">{{ playlist.name }}</a>
+            </li>
         {% endfor %}
     </ul>
+    {% else %}
+        <p>No playlists available</p>
+    {% endif %}
 </body>
 </html>
