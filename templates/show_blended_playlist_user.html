@@ -13,91 +13,139 @@
             margin: 0;
             padding: 20px;
         }
-        h1, h2 {
+
+        h1 {
             color: #1DB954;
+            margin-bottom: 10px;
         }
-        ul {
+
+        .compatibility {
+            color: #1DB954;
+            margin-bottom: 10px;
+        }
+
+        .info-boxes {
+            display: flex;
+            justify-content: center;
+        }
+
+        .info-box {
+            background-color: green;
+            color: black;
+            padding: 10px;
+            margin: 5px;
+            flex-basis: 20%;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .info-box h2 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .shared-artists ul, .top-genres ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
-        li {
-            background-color: #282828;
+
+        .shared-artists li, .top-genres li {
+            margin: 3px 0;
+        }
+
+        .button {
+            background-color: #1DB954;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .track-item {
             margin: 10px auto;
             padding: 10px;
             border-radius: 5px;
             max-width: 600px;
-            text-align: left;
-        }
-        .top-controls {
+            background-color: #282828;
             display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .top-controls form {
-            margin: 0 10px;
-        }
-        input[type="text"], input[type="submit"], input[type="checkbox"] {
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            margin: 5px;
-        }
-        input[type="text"] {
-            width: 200px;
-        }
-        input[type="submit"] {
-            background-color: #1DB954;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        input[type="submit"]:hover {
-            background-color: #1ed760;
-        }
-        .track-item {
-            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
-        .track-checkbox {
-            margin-right: 10px;
+
+        .track-info a {
+            color: #1DB954;
+            text-decoration: none;
         }
+
+        .track-info a:hover {
+            text-decoration: underline;
+        }
+
+        .track-ownership {
+            margin-left: auto;
+        }
+
     </style>
 </head>
 <body>
     <h1>Blended Playlist</h1>
+    <h2 class="compatibility">Playlist Compatibility: {{ compatibility }}%</h2>
 
-    {% if blended_tracks %}
-        <h2>Playlist Compatibility: {{ compatibility }}%</h2>
-
-        <div class="top-controls">
-            <!-- Separate form for reshuffling tracks -->
-            <form action="{{ url_for('blend_users') }}" method="post">
-                <input type="hidden" name="reshuffle" value="true">
-                <input type="hidden" name="blend_type" value="{{ blend_type }}">
-                <input type="submit" value="Reshuffle">
-            </form>
-        </div>
-
-        <!-- Form for creating a new playlist -->
-        <form action="{{ url_for('create_playlist_route') }}" method="post">
-            <input type="text" name="playlist_name" placeholder="Enter Playlist Name" required>
-            <input type="submit" value="Create Playlist">
-
-            <!-- Add hidden field to pass blend_id -->
-            <input type="hidden" name="blend_id" value="{{ blend_id }}"> 
-
+    <div class="info-boxes">
+        <div class="info-box shared-artists">
+            <h2>Shared Artists:</h2>
             <ul>
-                {% for track in blended_tracks %}
-                    <li class="track-item">
-                        <input type="checkbox" class="track-checkbox" name="track_selection" value="{{ track['id'] }}" checked>
-                        {{ track['name'] }} by {{ track['artists'] }}
-                    </li>
+                <!-- Dynamically populate shared artists -->
+                {% for artist in shared_artists %}
+                    <li>{{ artist }}</li>
                 {% endfor %}
             </ul>
-        </form>
+        </div>
 
-    {% else %}
-        <p>No tracks to display.</p>
-    {% endif %}
+        <div class="info-box top-genres">
+            <h2>Top Genres:</h2>
+            <ul>
+                <!-- Dynamically populate top genres -->
+                {% for genre in top_genres %}
+                    <li>{{ genre }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="top-controls">
+        <form action="{{ url_for('blend_users') }}" method="post">
+            <input type="hidden" name="reshuffle" value="true">
+            <input type="hidden" name="blend_type" value="{{ blend_type }}">
+            <input type="submit" value="Reshuffle" class="button">
+        </form>
+    </div>
+    <form action="{{ url_for('create_playlist_route') }}" method="post">
+        <input type="text" name="playlist_name" placeholder="Enter Playlist Name" required>
+        <input type="submit" value="Create Playlist" class="button">
+        <input type="hidden" name="blend_id" value="{{ blend_id }}">
+    
+        <ul>
+            {% for track in blended_tracks %}
+                <li class="track-item">
+                    <div class="track-info">
+                        <input type="checkbox" class="track-checkbox" name="track_selection" value="{{ track['id'] }}" checked>
+                        <a href="{{ track['url'] }}" target="_blank">{{ track['name'] }} by {{ track['artists'] }}</a>
+                    </div>
+                    <div class="track-ownership">
+                        - {{ track['ownership'] | capitalize }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </form>
+    
 </body>
 </html>

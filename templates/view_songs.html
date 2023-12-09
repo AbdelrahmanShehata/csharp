@@ -1,17 +1,83 @@
-<!-- view_songs.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Songs in Blend</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #1DB954;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #282828;
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+        }
+        .song-info {
+            color: #ccc;
+            font-size: 0.9em;
+            padding-left: 10px;
+        }
+        a {
+            color: #1DB954; /* Link color */
+            text-decoration: none;
+        }
+        a:hover {
+            color: #fff; /* Link color on hover */
+            text-decoration: underline;
+        }
+        input[type="text"], input[type="submit"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin: 5px;
+        }
+        input[type="text"] {
+            width: 200px;
+        }
+        input[type="submit"] {
+            background-color: #1DB954;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #1ed760;
+        }
+    </style>
 </head>
 <body>
     <h1>Songs in Blend</h1>
     {% if songs %}
-        <ul>
-            {% for song in songs %}
-                <li>{{ song.name }} by {{ song.artists }}</li>
-            {% endfor %}
-        </ul>
+        <form action="{{ url_for('create_playlist_route') }}" method="post">
+            <input type="text" name="playlist_name" placeholder="Enter Playlist Name" required>
+            <input type="submit" value="Create Playlist">
+            <ul>
+                {% for song in songs %}
+                    <li>
+                        <input type="checkbox" name="track_selection" value="{{ song.id }}" checked>
+                        <span class="song-info">{{ song.name }} by {{ song.artists }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </form>
     {% else %}
         <p>No songs found in this blend.</p>
     {% endif %}
