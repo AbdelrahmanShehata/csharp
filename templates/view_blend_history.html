@@ -93,7 +93,12 @@
 
     <div id="result-list">
         {% if blend_history %}
+            
             <ul>
+                {% if most_blended_user %} 
+                    <ul>
+                        <a href="/top_items/{{ most_blended_user.username }} "> {{most_blended_user.username}}</a> {{top_count}}</ul>
+                {% endif %}
                 {% for blend in blend_history %}
                     <li>
                         <strong>{{ blend.blend_name }}</strong> ({{ blend.blend_date.strftime('%Y-%m-%d %H:%M:%S') }})<br>
