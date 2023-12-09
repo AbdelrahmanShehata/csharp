@@ -1,7 +1,50 @@
+/* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    color: #1DB954;
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
-.option{
-    color: #1DB954;
+
+.header, .footer {
+    padding: 1em;
+    background-color: #1DB954;
+}
+
+.main {
+    padding: 1em;
+}
+
+.button {
+    background-color: #1DB954;
+    color: #fff;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.button:hover {
+    background-color: #1ed760;
+    transform: scale(1.05);
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu li {
+    margin: 10px 0;
+    display: inline-block; /* or use flex/grid for better alignment */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .menu li {
+        display: block;
+    }
 }

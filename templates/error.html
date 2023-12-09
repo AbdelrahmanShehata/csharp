@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Playlist Created</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Occurred</title>
     <style>
         body {
             background-color: #121212;
@@ -11,31 +13,38 @@
             margin: 0;
             padding: 20px;
         }
+        .error-container {
+            background-color: #282828;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            max-width: 600px;
+            text-align: center;
+        }
         h1 {
-            color: #1DB954;
+            color: #E53935; /* Red accent for error */
         }
         p {
-            margin: 10px 0;
+            color: #ccc;
+            font-size: 1.1em;
         }
         a {
-            display: inline-block;
-            background-color: #1DB954;
-            color: #fff;
-            padding: 10px 20px;
-            margin: 10px;
-            border-radius: 5px;
+            color: #1DB954;
             text-decoration: none;
-            transition: background-color 0.3s;
+            font-weight: bold;
         }
         a:hover {
-            background-color: #1ed760;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Playlist Successfully Created!</h1>
-    <p>Your new playlist has been created on Spotify.</p>
-    <p>Playlist ID: <a href="https://open.spotify.com/playlist/{{ playlist_id }}" target="_blank">{{ playlist_id }}</a></p>
-    <a href="/">Return to Home</a>
+    <div class="error-container">
+        <h1>Oops! Something Went Wrong</h1>
+        <p>Sorry, an unexpected error occurred. Please try again later or contact support if the problem persists.</p>
+        <a href="/">Go Back Home</a>
+    </div>
 </body>
 </html>
+
