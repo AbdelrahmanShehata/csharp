@@ -2,7 +2,7 @@
 body {
     background-color: #121212;
     color: #fff;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Helvetica', sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -18,19 +18,17 @@ body {
 }
 
 .button {
-    background-color: #1DB954;
-    color: #fff;
+    color: #000;
     padding: 0.5em 1em;
     border: none;
     border-radius: 5px;
     text-decoration: none;
-    transition: background-color 0.3s, transform 0.3s;
 }
 
-.button:hover {
+/* .button:hover {
     background-color: #1ed760;
     transform: scale(1.05);
-}
+} */
 
 .menu ul {
     list-style-type: none;
@@ -47,4 +45,46 @@ body {
     .menu li {
         display: block;
     }
+}
+
+.authorize-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: 'Helvetica', 'sans-serif';
+}
+
+.csharp-title {
+    color: white;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1.5s ease-in-out;
+    transform: translateY(100px); /* Increased space */
+    margin-bottom: -20px;
+}
+
+.authorize-text {
+    color: #1DB954;
+    font-weight: bold;
+    transition: opacity 1s ease-in-out, transform 1.5s ease-in-out;
+    transform: translateY(60px); /* Adjusted space */
+    transition-delay: 1ms;
+}
+
+.authorize-link {
+    color: black;
+    background-color: white;
+    font-size: 14px;
+    font-family: 'Helvetica', 'sans-serif'
+    transition: opacity 1s ease-in-out, transform 1.5s ease-in-out;
+    transform: translateY(80px); /* Adjusted space */
+    transition-delay: 1.5ms;
+    margin-top: -20px;
+}
+
+.fly-in {
+    opacity: 1;
+    transition: opacity 1s ease-in-out, transform 1.5s ease-in-out;
+    transform: translateY(-60px); /* Adjusted space */
 }
