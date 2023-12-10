@@ -4,49 +4,148 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #1DB954;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #1DB954;
+        }
+
+        select,
+        textarea {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #1DB954;
+            background-color: #282828;
+            color: #fff;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #1DB954;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1ed760;
+        }
+
+        h2 {
+            color: #1DB954;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        hr {
+            border-color: #1DB954;
+        }
+
+        button[type="submit"] {
+            padding: 8px 16px;
+            background-color: #1DB954;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1ed760;
+        }
+
+    </style>
 </head>
 <body>
     <h1>Song Reviews</h1>
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+    {% for message in messages %}
+    <div class="flash-message">{{ message }}</div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('display_song_reviews') }}">
+    <label for="user_filter">Filter by User:</label>
+    <select name="user_filter" id="user_filter">
+    <option value="">All Users</option>
+    {% for user_id, user in users.items() %}
+    <option value="{{ user_id }}">{{ user.username }}</option>
+    {% endfor %}
+    </select>
+    <button type="submit">Apply Filter</button>
+    </form>
+
     <!-- Create a form with a drop-down menu -->
     <form method="post" action="{{ url_for('add_song_review') }}">
-        <label for="song_id">Select a Song:</label>
-        <select name="song_id" id="song_id" required>
-            {% for song in songs %}
-                <option value="{{ song.id }}">{{ song.name }} - {{ song.artists }}</option>
-            {% endfor %}
-        </select>
-
-        <label for="rating">Rating:</label>
-    <select name="rating" id="rating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
+    <label for="song_id">Select a Song:</label>
+    <select name="song_id" id="song_id" required>
+    {% for song in songs %}
+    <option value="{{ song.id }}">{{ song.name }} - {{ song.artists }}</option>
+    {% endfor %}
     </select>
 
-        <label for="description">Description:</label>
-        <textarea name="description" required></textarea>
+    <label for="rating">Rating:</label>
+    <select name="rating" id="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    </select>
 
-        <button type="submit">Submit Review</button>
-        
+    <label for="description">Description:</label>
+    <textarea name="description" required></textarea>
+
+    <button type="submit">Submit Review</button>
     {% if reviews %}
-        <h2>Existing Reviews</h2>
+    <h2>Existing Reviews</h2>
         {% for review in reviews %}
         {% set user = users.get(review.uid) %}
         {% set song = allsongs.get(review.song_id) %}
         <p>User: {{ user.username if user else 'Unknown User' }}</p>
-          <p>Description: {{ review.description }}</p>
-          <p>Rating: {{ review.rating }}</p>
-          <p>Song: {{song.name}}</p>
-          <form method="post" action="{{ url_for('delete_review', rid=review.rid) }}">
+        <p>Description: {{ review.description }}</p>
+        <p>Rating: {{ review.rating }}</p>
+        <p>Song: {{ song.name }}</p>
+        <form method="post" action="{{ url_for('delete_review', rid=review.rid) }}">
             <button type="submit">Delete Review</button>
         </form>
-          <hr>
-        {% endfor %}
+        <hr>
+    {% endfor %}
+
     {% else %}
-        <p>No reviews available.</p>
+    <p>No reviews available.</p>
     {% endif %}
 </body>
 </html>

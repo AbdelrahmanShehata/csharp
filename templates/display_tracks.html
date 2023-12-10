@@ -75,7 +75,7 @@
     <ul id="songList">
         <!-- Your loop for listing songs -->
         {% for song_id, song_name, song_artists, added_on, duration, song_url in playlist_songs %}
-            <li data-name="{{ song_name }}" data-artist="{{ song_artists }}" data-duration="{{ duration }}" data-date="{{ added_on.strftime('%Y-%m-%d') }}">
+            <li data-name="{{ song_name }}" data-artist="{{ song_artists }}" data-duration="{{ duration }}" data-date="{{ added_on.strftime('%y-%m-%d') }}">
                 <div class="song-details">
                     <div>
                         <a href="{{ song_url }}" target="_blank"><strong>{{ song_name }}</strong></a>
